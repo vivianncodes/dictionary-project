@@ -7,12 +7,18 @@ body {
 }
 
 .App-header {
-  margin: 30px 0;
+  margin: 50px 0;
 }
 
 .App-logo {
   max-width: 150px;
   display: block;
+  margin: 0 auto;
+}
+
+.App h1 {
+  font-size: 45px;
+  font-weight: 800;
   margin: 0 auto;
 }
 
@@ -37,7 +43,7 @@ body {
 }
 
 .Results h2 {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -64,7 +70,26 @@ body {
   margin: 15px 0 0;
 }
 
+.Synonyms {
+  font-size: 15px;
+  margin: 20px 0;
+}
+
+.Synonyms ul {
+  padding: 0;
+}
+
+.Synonyms li {
+  display: inline-block;
+  font-size: 15px;
+  padding-right: 15px;
+}
+
 .Photos img {
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.App-footer a {
+  color: #51bcd8;
 }

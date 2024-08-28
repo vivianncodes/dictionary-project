@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Dictionary.css";
 import Results from "./Results";
 import Photos from "./Photos";
 
 export default function Dictionary() {
-  let [keyword, setKeyword] = useState("sunset");
+  let [keyword, setKeyword] = useState("");
   let [results, setResults] = useState(null);
-  let [loaded, setLoaded] = useState(false);
   let [photos, setPhotos] = useState(null);
 
   function handleDictionaryResponse(response) {
@@ -18,7 +16,8 @@ export default function Dictionary() {
     setPhotos(response.data.photos);
   }
 
-  function search() {
+  function search(event) {
+    event.preventDefault();
     let apiKey = "1cb183b1ed5397d3f0a3d9odtb9c94bc";
     let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
     axios.get(apiUrl).then(handleDictionaryResponse);
@@ -28,39 +27,24 @@ export default function Dictionary() {
     axios.get(imagesApiUrl).then(handleImagesResponse);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    search();
-  }
-
   function handleKeywordChange(event) {
     setKeyword(event.target.value);
   }
 
-  function load() {
-    setLoaded(true);
-    search();
-  }
-
-  if (loaded) {
-    return (
-      <div className="Dictionary">
-        <section>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="search"
-              autoFocus={true}
-              onChange={handleKeywordChange}
-              placeholder="Enter a word you want to look up..."
-            ></input>
-          </form>
-        </section>
-        <Results results={results} />
-        <Photos photos={photos} />
-      </div>
-    );
-  } else {
-    load();
-    return "Loading";
-  }
+  return (
+    <div className="Dictionary">
+      <section>
+        <form onSubmit={search}>
+          <input
+            type="search"
+            autoFocus={true}
+            onChange={handleKeywordChange}
+            placeholder="Enter a word you want to look up..."
+          ></input>
+        </form>
+      </section>
+      <Results results={results} />
+      <Photos photos={photos} />
+    </div>
+  );
 }
